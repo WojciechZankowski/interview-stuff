@@ -51,4 +51,60 @@ public class BitwiseOperatorsTest {
         assertEquals(0, value1 & value2);
     }
 
+    /**
+     * -13 |  1111 0011
+     * 5   |  0000 0101
+     * -----------------
+     * 5   |  0000 0001
+     */
+    @Test
+    public void testBitwiseAnd_04() {
+        final byte value1 = -13;
+        final byte value2 = 5;
+
+        assertEquals(1, value1 & value2);
+    }
+
+    /**
+     * -18 | 1110 1110
+     * -17 | 1110 1111
+     * ----------------
+     * -18 | 1110 1110
+     */
+    @Test
+    public void testBitwiseAnd_05() {
+        final byte value1 = -18;
+        final byte value2 = -17;
+
+        assertEquals(-18, value1 & value2);
+    }
+
+    /**
+     * -35 | 1101 1101
+     * -51 | 1100 1101
+     * ----------------
+     * -51 | 1100 1101
+     */
+    @Test
+    public void testBitwiseAnd_06() {
+        final byte value1 = -35;
+        final byte value2 = -51;
+
+        assertEquals(-51, value1 & value2);
+    }
+
+    /**
+     * -3 | 1111 1101
+     * 5  | 0000 0101
+     * ---------------
+     * 5  | 0000 0101
+     */
+    @Test
+    public void testBitwiseAnd_07() {
+        final byte value1 = -3;
+        final byte value2 = 5;
+
+        assertEquals(5, value1 & value2);
+    }
+
 }
