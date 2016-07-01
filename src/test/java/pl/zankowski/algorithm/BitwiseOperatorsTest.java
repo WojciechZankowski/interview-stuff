@@ -309,4 +309,143 @@ public class BitwiseOperatorsTest {
         assertEquals(6, ~value1);
     }
 
+    /**
+     * 6  | 0000 0110
+     * ---------------
+     * >> 1
+     * 3  | 0000 0011
+     * ---------------
+     * >> 2
+     * 1  | 0000 0001
+     * ---------------
+     * >> 3
+     * 0  | 0000 0000
+     */
+    @Test
+    public void testRightShift_01() {
+        final byte value1 = 6;
+
+        assertEquals(3, value1 >> 1);
+        assertEquals(1, value1 >> 2);
+        assertEquals(0, value1 >> 3);
+    }
+
+    /**
+     * 31 | 0001 1111
+     * ---------------
+     * >> 1
+     * 15 | 0000 1111
+     * ---------------
+     * >> 2
+     * 7  | 0000 0111
+     * ---------------
+     * >> 3
+     * 3  | 0000 0011
+     */
+    @Test
+    public void testRightShift_02() {
+        final byte value1 = 31;
+
+        assertEquals(15, value1 >> 1);
+        assertEquals(7, value1 >> 2);
+        assertEquals(3, value1 >> 3);
+    }
+
+    /**
+     * -9 | 1111 0111
+     * ---------------
+     * >> 1
+     * -5 | 1111 1011
+     * ---------------
+     * >> 2
+     * -3 | 1111 1101
+     * ---------------
+     * >> 3
+     * -2 | 1111 1110
+     */
+    @Test
+    public void testRightShift_03() {
+        final byte value = -9;
+
+        assertEquals(-5, value >> 1);
+        assertEquals(-3, value >> 2);
+        assertEquals(-2, value >> 3);
+    }
+
+    /**
+     * 15  | 0000 1111
+     * ----------------
+     * << 1
+     * 30  | 0001 1110
+     * ----------------
+     * << 2
+     * 60  | 0011 1100
+     * ----------------
+     * << 3
+     * 120 | 0111 1000
+     */
+    @Test
+    public void testLeftShift_01() {
+        final byte value = 15;
+
+        assertEquals(30, value << 1);
+        assertEquals(60, value << 2);
+        assertEquals(120, value << 3);
+    }
+
+    /**
+     * 6  | 0000 0110
+     * ---------------
+     * << 1
+     * 12 | 0000 1100
+     * ---------------
+     * << 2
+     * 24 | 0001 1000
+     * ---------------
+     * << 3
+     * 48 | 0011 0000
+     */
+    @Test
+    public void testLeftShift_02() {
+        final byte value = 6;
+
+        assertEquals(12, value << 1);
+        assertEquals(24, value << 2);
+        assertEquals(48, value << 3);
+    }
+
+    /**
+     * -127 | 1000 0001
+     * -----------------
+     * << 1
+     * -254 | 1 0000 0010
+     */
+    @Test
+    public void testLeftShift_03() {
+        final byte value = -127;
+
+        assertEquals(-254, value << 1);
+    }
+
+    /**
+     * -7  | 1111 1001
+     * ----------------
+     * << 1
+     * -14 | 1111 0010
+     * ----------------
+     * << 2
+     * -28 | 1110 0100
+     * ----------------
+     * << 3
+     * -56 | 1100 1000
+     */
+    @Test
+    public void testLeftShift_04() {
+        final byte value = -7;
+
+        assertEquals(-14, value << 1);
+        assertEquals(-28, value << 2);
+        assertEquals(-56, value << 3);
+    }
+
 }
