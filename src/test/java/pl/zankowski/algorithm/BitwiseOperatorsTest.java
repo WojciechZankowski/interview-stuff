@@ -107,4 +107,206 @@ public class BitwiseOperatorsTest {
         assertEquals(5, value1 & value2);
     }
 
+    /**
+     * -11 | 1111 0101
+     * 11  | 0000 1011
+     * ----------------
+     * 1   | 0000 0001
+     */
+    @Test
+    public void testBitwiseAnd_08() {
+        final byte value1 = -11;
+        final byte value2 = 11;
+
+        assertEquals(1, value1 & value2);
+    }
+
+    /**
+     * 17 |  0001 0001
+     * 11 |  0000 1011
+     * ----------------
+     * 27 |  0001 1011
+     */
+    @Test
+    public void testBitwiseOr_01() {
+        final byte value1 = 17;
+        final byte value2 = 11;
+
+        assertEquals(27, value1 | value2);
+    }
+
+    /**
+     * 16 | 0001 0000
+     * 8  | 0000 1000
+     * ---------------
+     * 24 | 0001 1000
+     */
+    @Test
+    public void testBitwiseOr_02() {
+        final byte value1 = 16;
+        final byte value2 = 8;
+
+        assertEquals(24, value1 | value2);
+    }
+
+    /**
+     * 4  | 0000 0100
+     * 15 | 0000 1111
+     * ---------------
+     * 15 | 0000 1111
+     */
+    @Test
+    public void testBitwiseOr_03() {
+        final byte value1 = 4;
+        final byte value2 = 15;
+
+        assertEquals(15, value1 | value2);
+    }
+
+    /**
+     * 7  | 0000 0111
+     * -8 | 1111 1000
+     * ---------------
+     * -1 | 1111 1111
+     */
+    @Test
+    public void testBitwiseOr_04() {
+        final byte value1 = 7;
+        final byte value2 = -8;
+
+        assertEquals(-1, value1 | value2);
+    }
+
+    /**
+     * -12 | 1111 0100
+     * -19 | 1110 1101
+     * ----------------
+     * -3  | 1111 1101
+     */
+    @Test
+    public void testBitwiseOr_05() {
+        final byte value1 = -12;
+        final byte value2 = -19;
+
+        assertEquals(-3, value1 | value2);
+    }
+
+    /**
+     * 3  | 0000 0011
+     * 14 | 0000 1110
+     * ---------------
+     * 13 | 0000 1101
+     */
+    @Test
+    public void testBitwiseXor_01() {
+        final byte value1 = 3;
+        final byte value2 = 14;
+
+        assertEquals(13, value1 ^ value2);
+    }
+
+    /**
+     * 23 | 0001 0111
+     * 31 | 0001 1111
+     * ---------------
+     * 8  | 0000 1000
+     */
+    @Test
+    public void testBitwiseXor_02() {
+        final byte value1 = 23;
+        final byte value2 = 31;
+
+        assertEquals(8, value1 ^ value2);
+    }
+
+    /**
+     * 111 | 0110 1111
+     * 1   | 0000 0001
+     * ----------------
+     * 110 | 0110 1110
+     */
+    @Test
+    public void testBitwiseXor_03() {
+        final byte value1 = 111;
+        final byte value2 = 1;
+
+        assertEquals(110, value1 ^ value2);
+    }
+
+    /**
+     * 14  | 0000 1110
+     * -11 | 1111 0101
+     * ----------------
+     * -5  | 1111 1011
+     */
+    @Test
+    public void testBitwiseXor_04() {
+        final byte value1 = 14;
+        final byte value2 = -11;
+
+        assertEquals(-5, value1 ^ value2);
+    }
+
+    /**
+     * -8  | 1111 0111
+     * -21 | 1110 1011
+     * ----------------
+     * 19  | 0001 0011
+     */
+    @Test
+    public void testBitwiseXor_05() {
+        final byte value1 = -8;
+        final byte value2 = -21;
+
+        assertEquals(19, value1 ^ value2);
+    }
+
+    /**
+     * 15  | 0000 1111
+     * ---------------
+     * -16 | 1111 0000
+     */
+    @Test
+    public void testBitwiseNot_01() {
+        final byte value1 = 15;
+
+        assertEquals(-16, ~value1);
+    }
+
+    /**
+     * 3  | 0000 0011
+     * --------------
+     * -4 | 1111 1100
+     */
+    @Test
+    public void testBitwiseNot_02() {
+        final byte value1 = 3;
+
+        assertEquals(-4, ~value1);
+    }
+
+    /**
+     * -41 | 1101 0111
+     * ----------------
+     * 40  | 0010 1000
+     */
+    @Test
+    public void testBitwiseNot_03() {
+        final byte value1 = -41;
+
+        assertEquals(40, ~value1);
+    }
+
+    /**
+     * -7 | 1111 1001
+     * ---------------
+     * 6  | 0000 0110
+     */
+    @Test
+    public void testBitwiseNot_04() {
+        final byte value1 = -7;
+
+        assertEquals(6, ~value1);
+    }
+
 }
