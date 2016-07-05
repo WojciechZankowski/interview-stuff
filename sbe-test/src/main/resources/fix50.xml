@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<sbe:messageSchema xmlns:sbe="http://fixprotocol.io/sbe/rc4"
+                   package="baseline"
+                   id="1"
+                   version="0"
+                   semanticVersion="5.2"
+                   description="Example schema"
+                   byteOrder="littleEndian">
+
+    <types>
+        <type name="String8" length="8" primitiveType="char"/>
+        <type name="String10" length="10" primitiveType="char"/>
+        <type name="String12" length="12" primitiveType="char"/>
+
+        <enum name="SubscriptionRequestType" encodingType="char">
+            <validValue name="SNAPSHOT">0</validValue>
+            <validValue name="SNAPSHOT_PLUS_UPDATES">1</validValue>
+            <validValue name="DISABLE_SNAPSHOT">2</validValue>
+        </enum>
+
+        <enum name="AggregatedBook" encodingType="int8" semanticType="Boolean">
+            <validValue name="NO">0</validValue>
+            <validValue name="YES">1</validValue>
+        </enum>
+
+        <type name="Symbol" length="6" primitiveType="char"/>
+        <type name="CFICode" length="6" primitiveType="char"/>
+        <type name="LocalMktDate" primitiveType="uint16" semanticType="LocalMktDate"/>
+        <type name="timestamp" primitiveType="uint64" semanticType="UTCTimestamp"/>
+        <type name="SecurityExchange" length="10" primitiveType="char"/>
+
+        <enum name="MDUpdateAction" encodingType="uint8" semanticType="int">
+            <validValue name="NEW">0</validValue>
+            <validValue name="CHANGE">1</validValue>
+            <validValue name="DELETE">2</validValue>
+            <validValue name="OVERLAY">5</validValue>
+        </enum>
+
+        <composite name="Decimal64">
+            <type name="mantissa" primitiveType="int64"/>
+            <type name="exponent" primitiveType="int8" presence="constant">7</type>
+        </composite>
+
+        <composite name="IntQty32" semanticType="Qty">
+            <type name="mantissa" primitiveType="int32"/>
+            <type name="exponent" primitiveType="int8" presence="constant">0</type>
+        </composite>
+
+        <composite name="groupSizeEncoding" semanticType="NumInGroup">
+            <type name="blockLength" primitiveType="uint16"/>
+            <type name="numInGroup" primitiveType="uint16"/>
+        </composite>
+
+        <composite name="messageHeader" description="Message identifiers and length of message root">
+            <type name="blockLength" primitiveType="uint16"/>
+            <type name="templateId" primitiveType="uint16"/>
+            <type name="schemaId" primitiveType="uint16"/>
+            <type name="version" primitiveType="uint16"/>
+        </composite>
+
+        <enum name="MatchEventIndicator" encodingType="char" semanticType="MatchEventIndicator">
+            <validValue name="MID_EVENT">0</validValue>
+            <validValue name="BEGINNING_EVENT">1</validValue>
+            <validValue name="END_EVENT">2</validValue>
+            <validValue name="BEGINNING_AND_END_EVENT">3</validValue>
+        </enum>
+
+        <enum name="Side" encodingType="char">
+            <validValue name="BUY">1</validValue>
+            <validValue name="SELL">2</validValue>
+        </enum>
+
+        <enum name="MDEntryType" encodingType="char" semanticType="char">
+            <validValue name="BID">0</validValue>
+            <validValue name="OFFER">1</validValue>
+            <validValue name="TRADE">2</validValue>
+            <validValue name="OPENING_PRICE">4</validValue>
+            <validValue name="SETTLEMENT_PRICE">6</validValue>
+            <validValue name="TRADING_SESSION_HIGH_PRICE">7</validValue>
+            <validValue name="TRADING_SESSION_LOW_PRICE">8</validValue>
+            <validValue name="TRADE_VOLUME">B</validValue>
+            <validValue name="OPEN_INTEREST">C</validValue>
+            <validValue name="SIMULATED_SELL">E</validValue>
+            <validValue name="SIMULATED_BUY">F</validValue>
+            <validValue name="EMPTY_THE_BOOK">J</validValue>
+            <validValue name="SESSION_HIGH_BID">N</validValue>
+            <validValue name="SESSION_LOW_OFFER">O</validValue>
+            <validValue name="FIXING_PRICE">W</validValue>
+            <validValue name="CASH_NOTE">X</validValue>
+        </enum>
+    </types>
+
+    <sbe:message name="MarketDataRequest" id="1" description="Request for market data">
+        <field name="MDReqID" id="262" type="String10"/>
+        <field name="SubscriptionRequestType" id="263" type="SubscriptionRequestType"/>
+        <field name="MarketDepth" id="264" type="uint8"/>
+        <field name="Symbol" id="55" type="Symbol"/>
+        <field name="SecurityExchange" id="207" type="SecurityExchange"/>
+        <field name="CFICode" id="461" type="CFICode"/>
+        <field name="MaturityDate" id="541" type="LocalMktDate"/>
+    </sbe:message>
+
+    <sbe:message name="MarketDataIncrementalRefreshTrades" id="2" semanticType="X" description="Trade">
+        <field name="TransactTime" id="60" type="timestamp" timeUnit="nanosecond"/>
+        <field name="EventTimeDelta" id="37704" type="uint16"/>
+        <field name="MatchEventIndicator" id="5799" type="MatchEventIndicator"/>
+        <group name="MdIncGrp" id="268">
+            <field name="TradeId" id="1003" type="uint64"/>
+            <field name="SecurityId" id="48" type="uint64"/>
+            <field name="MdEntryPx" id="270" type="Decimal64"/>
+            <field name="MdEntrySize" id="271" type="IntQty32"/>
+            <field name="NumberOfOrders" id="346" type="uint16"/>
+            <field name="MdUpdateAction" id="279" type="MDUpdateAction"/>
+            <field name="RptSeq" id="83" type="uint8"/>
+            <field name="AggressorSide" id="5797" type="Side"/>
+            <field name="MdEntryType" id="269" type="MDEntryType" presence="constant" valueRef="MDEntryType.TRADE"/>
+        </group>
+    </sbe:message>
+
+</sbe:messageSchema>

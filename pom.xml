@@ -6,7 +6,11 @@
 
     <groupId>pl.zankowski</groupId>
     <artifactId>algorithm</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>sbe-test</module>
+    </modules>
 
     <dependencies>
 
